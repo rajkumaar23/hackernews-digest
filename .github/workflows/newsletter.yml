@@ -1,9 +1,6 @@
 name: Newsletter Cron
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron:  '0 7 * * *'
 
