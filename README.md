@@ -10,3 +10,7 @@ This script makes use of GitHub actions to send daily newsletters with top 10 po
   - `SMTP_PASS` - This is the password for the `SMTP_FROM` email address.
   - `SMTP_TO` - This is the email address of the recipient. Most often, this will be the same as `SMTP_FROM`.
 - Once the above steps are done, you will start receiving mails in the `SMTP_TO` address every day at 07:00 AM.
+
+# How does it look?
+
+![image](screenshot.png)
