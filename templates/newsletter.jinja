@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://fonts.cdnfonts.com/css/skratch-punk" rel="stylesheet" />
+    <link href="http://fonts.cdnfonts.com/css/negotiate" rel="stylesheet" />
+
+    <title>HN Newsletter by Rajkumar</title>
+    <style>
+      body {
+        background: rgb(240, 240, 240);
+      }
+      a.orange {
+        color: rgb(255, 102, 0);
+      }
+      h1 {
+        color: rgb(223, 90, 2);
+      }
+      ol {
+        margin-left: -16px;
+      }
+      li p,
+      h5,
+      footer {
+        font-family: "Negotiate Free", sans-serif;
+        font-size: medium;
+        margin: 8px 0;
+      }
+      h1 {
+        font-family: "Skratch Punk", sans-serif;
+        margin-bottom: -10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HN News Letter</h1>
+    <h5>{{ day }}</h5>
+    <ol>
+      {% for item in digest -%}
+      <li>
+        <p>
+          <a class="orange" href="{{ item.href }}">{{ item.title }}</a>
+        </p>
+        <p>
+          <a href="https://{{ item.href }}">{{ item.href }}</a> |
+          <span>{{ item.points }}</span>
+        </p>
+      </li>
+      {% endfor %}
+    </ol>
+    <footer>
+      Built with &hearts; by <a href="https://rajkumaar.co.in">Rajkumar</a>
+    </footer>
+  </body>
+</html>
