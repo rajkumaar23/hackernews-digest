@@ -9,7 +9,6 @@
     <title>HackerNews Digest by Rajkumar</title>
     <style>
       body {
-        background: rgb(240, 240, 240);
         padding: 10px;
       }
       a.orange {
@@ -47,7 +46,8 @@
           <a class="orange" href="{{ item.href }}">{{ item.title }}</a>
         </p>
         <p>
-          <span>{{ item.domain }}</span> | <span>{{ item.points }}</span>
+          <a href="{{ item.domain }}">{{ item.domain }}</a> |
+          <span>{{ item.points }}</span>
         </p>
       </li>
       {% endfor %}
