@@ -9,10 +9,10 @@ import getopt
 import sys
 
 argv = sys.argv[1:]
-opts, args = getopt.getopt(argv, '', ['date=', 'pass=', 'from=', 'to='])
+opts, args = getopt.getopt(argv, '', ['date=', 'pass=', 'from=', 'to=', 'host='])
 
 day = date.today()
-sender = receiver = email = ''
+sender = receiver = email = host = ''
 
 for (opt, value) in opts:
     if opt == "--date":
@@ -23,8 +23,10 @@ for (opt, value) in opts:
         sender = value
     elif opt == "--to":
         receiver = value
+    elif opt == "--host":
+        host = value
 
-if not sender or not receiver or not password:
+if not sender or not receiver or not password or not host:
     print("One or more required parameters empty")
     exit(1)
 
@@ -62,7 +64,7 @@ message["From"] = sender
 message["To"] = receiver
 message.attach(MIMEText(body, "html"))
 context = ssl.create_default_context()
-with smtplib.SMTP("smtp.mail.me.com", 587) as server:
+with smtplib.SMTP(host, 587) as server:
     server.starttls(context=context)
     server.login(sender, password)
     server.sendmail(sender, receiver, message.as_string())
