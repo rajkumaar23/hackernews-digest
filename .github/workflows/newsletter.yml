@@ -15,8 +15,9 @@ jobs:
       - name: Send the newsletter
         run: |
           export YESTERDAY_DATE=$(date -d "yesterday" '+%Y-%m-%d')
-          python3 main.py --date=${YESTERDAY_DATE} --from=${SMTP_FROM} --pass=${SMTP_PASS} --to=${SMTP_TO}
+          python3 main.py --date=${YESTERDAY_DATE} --from=${SMTP_FROM} --pass=${SMTP_PASS} --to=${SMTP_TO} --host=${SMTP_HOST}
         env:
           SMTP_FROM: ${{ secrets.SMTP_FROM }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           SMTP_TO: ${{ secrets.SMTP_TO }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
