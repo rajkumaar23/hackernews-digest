@@ -3,10 +3,14 @@ from jinja2 import Environment, FileSystemLoader
 from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from urllib.parse import urlparse
 import requests
 import smtplib, ssl
 import getopt
 import sys
+
+def is_absolute(url):
+    return bool(urlparse(url).netloc)
 
 argv = sys.argv[1:]
 opts, args = getopt.getopt(argv, '', ['date=', 'pass=', 'from=', 'to=', 'host='])
@@ -45,6 +49,7 @@ for item in items:
         domain = domain_item.text
     else:
         domain = 'news.ycombinator.com'
+    href = href if is_absolute(href) else 'https://' + domain + '/' + (href.strip("/"))
     points = soup.find('span', id=("score_" + id)).text
     digest.append({
         'title': title,
