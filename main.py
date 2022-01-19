@@ -41,7 +41,7 @@ digest = []
 
 for item in items:
     id = item['id']
-    story = item.find('a', class_="storylink")
+    story = item.find('a', class_="titlelink")
     title = story.text
     href = story['href']
     domain_item = item.find('span', class_="sitestr")
