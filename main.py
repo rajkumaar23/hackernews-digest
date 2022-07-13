@@ -37,8 +37,10 @@ if not sender or not receiver or not password or not host:
 page = requests.get("https://news.ycombinator.com/front?day=" + day)
 soup = BeautifulSoup(page.content, 'html.parser')
 items = soup.find_all('tr', class_="athing")[:10]
-digest = []
+print("10 items fetched")
 
+digest = []
+print("Processing each story")
 for item in items:
     id = item['id']
     story = item.find('a', class_="titlelink")
@@ -57,11 +59,13 @@ for item in items:
         'domain': domain,
         'points': points
     })
+    print("Processed story with id = " + id)
 
 file_loader = FileSystemLoader('templates')
 env = Environment(loader=file_loader)
 template = env.get_template('newsletter.jinja')
 body = template.render(day=day, digest=digest)
+print("Preparing digest email body")
 
 message = MIMEMultipart("alternative")
 message["Subject"] = f"%s | HackerNews" % day
@@ -71,5 +75,8 @@ message.attach(MIMEText(body, "html"))
 context = ssl.create_default_context()
 with smtplib.SMTP(host, 587) as server:
     server.starttls(context=context)
-    server.login(sender, password)
+    print("Loggin in via SMTP")
+    res = server.login(sender, password)
+    print(res)
     server.sendmail(sender, receiver, message.as_string())
+    print("Email sent")
